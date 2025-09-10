@@ -84,6 +84,7 @@ def gsr_intersection(request):
         "numero_telephone",
         "email",
         "form_prise_contact",
+        "informations",
         "adresse",
         "google_maps",
     ]
