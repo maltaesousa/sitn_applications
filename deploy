@@ -20,12 +20,14 @@ def fetch_last_env(env_file_name):
         os.environ["SITN_ENV_PATH"] = input("Ou se trouve le dossier des environnements de déploiement?")
 
     env_file_path = f"{os.environ['SITN_ENV_PATH']}/{APP_NAME}/{env_file_name}"
+    migrate_env_file_path = f"{os.environ['SITN_ENV_PATH']}/{APP_NAME}/.env.migrate"
 
     if not os.path.isfile(env_file_path):
         print(f"💥 {env_file_path} n'existe pas.")
         sys.exit(f"ERREUR: {env_file_path} pas à jour!")
     
     shutil.copy(env_file_path, ".")
+    shutil.copy(migrate_env_file_path, ".")
 
 def check_settings_file(dest_instance):
     # Do not deploy to the internet with DEBUG set to True
