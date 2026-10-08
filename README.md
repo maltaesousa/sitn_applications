@@ -136,7 +136,7 @@ Deployments are based on shared .env files.
 A dedicated `migrate` service starts, runs `python manage.py migrate`
 and stops.
 
-Then you'll be able to deploy your instance with `python deploy <context> <instance>`
+Images are tagged with the version found in the `VERSION` file. So change the version there wheneve needed, commit and then deploy.
 
 Example:
 

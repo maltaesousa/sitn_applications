@@ -12,6 +12,13 @@ import shutil
 CONTEXTS = ["internet", "intranet"]
 ALLOWED_INSTANCES = ["prepub", "prod", "dev", "local"]
 APP_NAME = "sitn_applications"
+VERSION_FILE = Path(__file__).resolve().parent / "VERSION"
+
+def read_version():
+    version = VERSION_FILE.read_text().strip()
+    if not re.fullmatch(r"\d+\.\d+\.\d+", version):
+        sys.exit(f"Version invalide dans {VERSION_FILE}: {version}")
+    return version
 
 def fetch_last_env(env_file_name):
     print(f"Mise à jour du fichier {env_file_name}")
@@ -64,6 +71,10 @@ def main():
 
     os.environ['ENV_FILE'] = env_file
     load_dotenv(Path(env_file), override=True)
+
+    version = read_version()
+    os.environ['IMAGE_TAG'] = version
+    print(f"Version de l'image: {version}")
 
     dest_docker_host = os.environ['DOCKER_HOST']
     os.environ['DOCKER_HOST'] = ""
