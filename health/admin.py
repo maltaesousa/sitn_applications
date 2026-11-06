@@ -111,7 +111,9 @@ class St23HealthSiteAdmin(admin.ModelAdmin):
     list_display = [
         'site_name',
         'address',
+        'is_requested_by_email',
     ]
+    list_filter = ['is_requested_by_email']
     ordering = ['site_name']
 
 admin.site.register(St22DoctorChangeSuggestion, St22DoctorChangeSuggestionAdmin)
